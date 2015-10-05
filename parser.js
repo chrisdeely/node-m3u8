@@ -1,5 +1,5 @@
 var util = require('util'),
-    ChunkedStream = require('chunked-stream'),
+    EventEmitter = require('events').EventEmitter,
     M3U = require('./m3u'),
     PlaylistItem = require('./m3u/PlaylistItem'),
     StreamItem = require('./m3u/StreamItem'),
@@ -10,7 +10,9 @@ var util = require('util'),
 var NON_QUOTED_COMMA = /,(?=(?:[^"]|"[^"]*")*$)/;
 
 var m3uParser = module.exports = function m3uParser() {
-  ChunkedStream.apply(this, ['\n', true]);
+  this.matcher = '\n';
+  this.passEmpty = true;
+  this.buffer = '';
 
   this.linesRead = 0;
   this.m3u = new M3U;
@@ -22,12 +24,40 @@ var m3uParser = module.exports = function m3uParser() {
   });
 };
 
-util.inherits(m3uParser, ChunkedStream);
+util.inherits(m3uParser, EventEmitter);
 
 m3uParser.M3U = M3U;
 
 m3uParser.createStream = function() {
   return new m3uParser;
+};
+
+m3uParser.prototype.write = function (chunk) {
+    chunk = chunk.toString();
+    var len = chunk.length
+        , i = 0;
+
+    while (i < len) {
+        var char = chunk[i].toString();
+        this.buffer += char;
+        if (char == this.matcher) {
+            var data = this.buffer;
+            this.buffer = '';
+            if (!this.passEmpty && data == this.matcher) {
+                return true; // skip
+            }
+            this.emit('data', data)
+        }
+        i++
+    }
+    return true
+};
+
+m3uParser.prototype.end = function () {
+    if (this.buffer) {
+        this.emit('data', this.buffer)
+    }
+    this.emit('end')
 };
 
 m3uParser.prototype.parse = function parse(line) {
