@@ -1,4 +1,4 @@
-var util = require('util'),
+var inherits = require('util').inherits,
     EventEmitter = require('events').EventEmitter,
     M3U = require('./m3u'),
     PlaylistItem = require('./m3u/PlaylistItem'),
@@ -24,7 +24,7 @@ var m3uParser = module.exports = function m3uParser() {
   });
 };
 
-util.inherits(m3uParser, EventEmitter);
+inherits(m3uParser, EventEmitter);
 
 m3uParser.M3U = M3U;
 

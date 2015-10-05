@@ -1,11 +1,11 @@
-var util = require('util'),
+var inherits = require('util').inherits,
     Item = require('./Item');
 
 var PlaylistItem = module.exports = function PlaylistItem() {
   Item.call(this);
 };
 
-util.inherits(PlaylistItem, Item);
+inherits(PlaylistItem, Item);
 
 PlaylistItem.create = function createPlaylistItem(data) {
   var item = new PlaylistItem();

@@ -1,4 +1,4 @@
-var util = require('util'),
+var inherits = require('util').inherits,
     Item = require('./Item'),
     AttributeList = require('./AttributeList');
 
@@ -6,7 +6,7 @@ var StreamItem = module.exports = function StreamItem(attributes) {
   Item.apply(this, arguments);
 };
 
-util.inherits(StreamItem, Item);
+inherits(StreamItem, Item);
 
 StreamItem.create = function createStreamItem(data) {
   var item = new StreamItem();
