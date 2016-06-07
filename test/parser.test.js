@@ -53,7 +53,7 @@ describe('parser', function() {
       var parser = getParser();
 
       parser.EXTINF('4.5,some title');
-      parser.currentItem.constructor.name.should.eql('PlaylistItem');
+      parser.currentItem.getType().should.eql('PlaylistItem');
       parser.currentItem.get('duration').should.eql(4.5);
       parser.currentItem.get('title').should.eql('some title');
     });
@@ -74,7 +74,7 @@ describe('parser', function() {
       var parser = getParser();
 
       parser['EXT-X-STREAM-INF']('NAME="I am a stream!"');
-      parser.currentItem.constructor.name.should.eql('StreamItem');
+      parser.currentItem.getType().should.eql('StreamItem');
       parser.currentItem.get('name').should.eql('I am a stream!');
     });
   });
@@ -84,7 +84,7 @@ describe('parser', function() {
       var parser = getParser();
 
       parser['EXT-X-I-FRAME-STREAM-INF']('NAME="I am an iframe stream!"');
-      parser.currentItem.constructor.name.should.eql('IframeStreamItem');
+      parser.currentItem.getType().should.eql('IframeStreamItem');
       parser.currentItem.get('name').should.eql('I am an iframe stream!');
     });
   });
@@ -94,7 +94,7 @@ describe('parser', function() {
       var parser = getParser();
 
       parser['EXT-X-MEDIA']('NAME="I am a media item!"');
-      parser.currentItem.constructor.name.should.eql('MediaItem');
+      parser.currentItem.getType().should.eql('MediaItem');
       parser.currentItem.get('name').should.eql('I am a media item!');
     });
   });

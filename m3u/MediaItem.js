@@ -18,3 +18,7 @@ MediaItem.create = function createMediaItem(data) {
 MediaItem.prototype.toString = function toString() {
   return '#EXT-X-MEDIA:' + this.attributes.toString();
 };
+
+MediaItem.prototype.getType = function getType() {
+  return 'MediaItem';
+};

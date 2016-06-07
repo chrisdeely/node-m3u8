@@ -37,3 +37,7 @@ PlaylistItem.prototype.toString = function toString() {
 
   return output.join('\n');
 };
+
+PlaylistItem.prototype.getType = function getType() {
+  return 'PlaylistItem';
+};

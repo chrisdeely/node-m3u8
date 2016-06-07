@@ -21,3 +21,7 @@ StreamItem.prototype.toString = function toString() {
 
   return output.join('\n');
 };
+
+StreamItem.prototype.getType = function getType() {
+  return 'StreamItem';
+};

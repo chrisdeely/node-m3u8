@@ -18,3 +18,7 @@ IframeStreamItem.create = function createIframeStreamItem(data) {
 IframeStreamItem.prototype.toString = function toString() {
   return '#EXT-X-I-FRAME-STREAM-INF:' + this.attributes.toString();
 };
+
+IframeStreamItem.prototype.getType = function getType() {
+  return 'IframeStreamItem';
+};
