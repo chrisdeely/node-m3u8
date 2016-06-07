@@ -1,4 +1,4 @@
-var util = require('util'),
+var inherits = require('util').inherits,
     Item = require('./Item');
 
 var MediaItem = module.exports = function MediaItem(attributes) {
@@ -7,7 +7,7 @@ var MediaItem = module.exports = function MediaItem(attributes) {
   delete this.properties['uri'];
 };
 
-util.inherits(MediaItem, Item);
+inherits(MediaItem, Item);
 
 MediaItem.create = function createMediaItem(data) {
   var item = new MediaItem();

@@ -1,4 +1,4 @@
-var util       = require('util'),
+var inherits = require('util').inherits,
     StreamItem = require('./StreamItem');
 
 var IframeStreamItem = module.exports = function IframeStreamItem(attributes) {
@@ -7,7 +7,7 @@ var IframeStreamItem = module.exports = function IframeStreamItem(attributes) {
   delete this.properties['uri'];
 };
 
-util.inherits(IframeStreamItem, StreamItem);
+inherits(IframeStreamItem, StreamItem);
 
 IframeStreamItem.create = function createIframeStreamItem(data) {
   var item =  new IframeStreamItem();
